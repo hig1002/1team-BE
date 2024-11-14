@@ -12,6 +12,6 @@ public class AuthRequestDto {
     private String department;
     private String name;
     private String email;
-    private String passwords;
-    private Boolean agreement;
+    private String password;
+    private boolean agreement;
 }

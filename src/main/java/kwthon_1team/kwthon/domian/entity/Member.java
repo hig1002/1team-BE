@@ -1,6 +1,7 @@
 package kwthon_1team.kwthon.domian.entity;
 
 import jakarta.persistence.*;
+import kwthon_1team.kwthon.domian.dto.request.AuthRequestDto;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -35,12 +36,20 @@ public class Member {
     private Integer authentication;  // 이메일 인증번호
 
     @Column (nullable = false)
-    private Integer treeLevel;
+    private Integer treeLevel = 0;
 
-    @OneToMany(mappedBy = "sender", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Mail> senders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "receiver", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Mail> receivers = new ArrayList<>();
+
+    public Member(AuthRequestDto authRequestDto) {
+        this.studentId = authRequestDto.getStudentId();
+        this.department = authRequestDto.getDepartment();
+        this.name = authRequestDto.getName();
+        this.email = authRequestDto.getEmail();
+        this.password = authRequestDto.getPassword();
+    }
 
 }
