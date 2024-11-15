@@ -1,3 +1,5 @@
+package kwthon_1team.kwthon.controller;
+
 import kwthon_1team.kwthon.common.BaseErrorResponse;
 import kwthon_1team.kwthon.exception.BaseException;
 import org.springframework.http.HttpStatus;

@@ -1,3 +1,5 @@
+package kwthon_1team.kwthon.service;
+
 import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
