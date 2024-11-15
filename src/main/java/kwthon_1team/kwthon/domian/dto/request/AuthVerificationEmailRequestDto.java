@@ -5,9 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class AuthLoginRequestDto {
-    private Long studentId;
-    private String password;
+@AllArgsConstructor
+public class AuthVerificationEmailRequestDto {
+    private Integer code;
 }

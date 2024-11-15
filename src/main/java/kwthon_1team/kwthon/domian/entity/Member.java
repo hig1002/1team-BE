@@ -2,7 +2,9 @@ package kwthon_1team.kwthon.domian.entity;
 
 import jakarta.persistence.*;
 import kwthon_1team.kwthon.domian.dto.request.AuthRequestDto;
+import kwthon_1team.kwthon.exception.BaseException;
 import lombok.*;
+import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,17 +25,11 @@ public class Member {
     @Column (nullable = false)
     private String name;
 
-    @Column
+    @Column (name = "email", unique = true)
     private String email;
 
     @Column
     private String password;
-
-    @Column
-    private Boolean isPublic;
-
-    @Column
-    private Integer authentication;  // 이메일 인증번호
 
     @Column (nullable = false)
     private Integer treeLevel = 0;
@@ -52,4 +48,9 @@ public class Member {
         this.password = authRequestDto.getPassword();
     }
 
+    public void validatePassword(String password) {
+        if (!password.equals(this.password)) {
+            throw new BaseException(HttpStatus.UNAUTHORIZED.value(), "비밀번호 일치하지 않음");
+        }
+    }
 }

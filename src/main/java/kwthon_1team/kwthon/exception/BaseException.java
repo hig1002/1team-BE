@@ -1,5 +1,6 @@
 package kwthon_1team.kwthon.exception;
 
+import kwthon_1team.kwthon.common.BaseErrorResponse;
 import lombok.Getter;
 import lombok.Setter;
 
