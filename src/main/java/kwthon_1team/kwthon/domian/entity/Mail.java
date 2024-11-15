@@ -28,20 +28,14 @@ public class Mail {
     @Column (nullable = false)
     private LocalDateTime mailDate;
 
-    @Column (nullable = false)
-    private String receiver;
-
-    @Column (nullable = false)
-    private String sender;
-
     @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "sender", referencedColumnName = "studentId")
-    private Member member;
+    @JoinColumn (name = "sender")
+    private Member sender;
 
     @ManyToOne (fetch = FetchType.LAZY)   // 여기가... 문제
-    @JoinColumn (name = "receiver", referencedColumnName = "studentId")
-    private Member member2;
+    @JoinColumn (name = "receiver")
+    private Member receiver;
 
-    @OneToMany (mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany (mappedBy = "mail", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Photo> photos = new ArrayList<>();
 }
