@@ -53,7 +53,7 @@ jobs:
       run: |
         cd ./src/main/resources
         # application-mail.properties 파일 생성
-        touch ./src/main/resources/application-mail.properties
+        touch ./application-mail.properties
         # application-mail.propertie 내용추가
         echo "${{ secrets.MAIL_PROPERTIES }}" >> ./application-mail.properties
     
