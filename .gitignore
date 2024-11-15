@@ -38,3 +38,11 @@ out/
 
 ### application.yml
 *.yml
+
+### postgreSQL 관련 정보 ###
+
+### Email 관련 정보 ###
+application-mail.properties
+
+### AWS S3 관련 정보 ###
+application-S3.properties
