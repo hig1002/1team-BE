@@ -43,33 +43,20 @@ jobs:
     - name: make application.properties
       run: |
         # create application.properties
-        cd ./src/main
-        cd ./resources
 
         # application.properties 파일 생성하기
         touch ./application.properties
 
-        echo "${{ secrets.S3_ACCESS_KEY }}" >> ./application.properties
-        echo "${{ secrets.S3_SECRET_KEY }}" >> ./application.properties
+        echo "${{ secrets.PROPERTIES }}" >> ./application.properties
+
         
     - name: Create application-mail.properties
       run: |
         # application-mail.properties 파일 생성
         touch ./src/main/resources/application-mail.properties
     
-        # GitHub Secrets 값으로 파일에 추가
-        echo "spring.mail.host=${{ secrets.MAIL_HOST }}" >> ./src/main/resources/application-mail.properties
-        echo "spring.mail.port=${{ secrets.MAIL_PORT }}" >> ./src/main/resources/application-mail.properties
-        echo "spring.mail.username=${{ secrets.MAIL_USERNAME }}" >> ./src/main/resources/application-mail.properties
-        echo "spring.mail.password=${{ secrets.MAIL_PASSWORD }}" >> ./src/main/resources/application-mail.properties
-        echo "spring.mail.properties.debug=${{ secrets.MAIL_DEBUG }}" >> ./src/main/resources/application-mail.properties
-        echo "spring.mail.properties.mail.smtp.auth=${{ secrets.MAIL_SMTP_AUTH }}" >> ./src/main/resources/application-mail.properties
-        echo "spring.mail.properties.mail.smtp.ssl.enable=${{ secrets.MAIL_SMTP_SSL_ENABLE }}" >> ./src/main/resources/application-mail.properties
-        echo "spring.mail.properties.mail.smtp.starttls.enable=${{ secrets.MAIL_SMTP_STARTTLS }}" >> ./src/main/resources/application-mail.properties
-        echo "spring.mail.properties.mail.smtp.ssl.trust=${{ secrets.MAIL_SMTP_SSL_TRUST }}" >> ./src/main/resources/application-mail.properties
-    
-
-        
+        # application-mail.propertie 내용추가
+        echo "${{ secrets.MAIL_PROPERTIES }}" >> ./application-mail.properties
     
       shell: bash
 
