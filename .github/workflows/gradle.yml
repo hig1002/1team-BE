@@ -39,7 +39,20 @@ jobs:
 
         # Secrets에 저장한 값을 application.yml 파일에 쓰기
         echo "${{ secrets.YML }}" >> ./application.yml
+    
+    - name: make application.properties
+      run: |
+        # create application.properties
+        cd ./src/main
+        cd ./resources
 
+        # application.properties 파일 생성하기
+        touch ./application.properties
+
+        echo "${{ secrets.S3_ACCESS_KEY }}" >> ./application.properties
+        echo "${{ secrets.S3_SECRET_KEY }}" >> ./application.properties
+        
+    
       shell: bash
 
     - name: Build with Gradle
