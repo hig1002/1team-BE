@@ -2,6 +2,7 @@ package kwthon_1team.kwthon.controller;
 
 import kwthon_1team.kwthon.common.BaseResponse;
 import kwthon_1team.kwthon.domian.dto.request.AuthDuplicationRequestDto;
+import kwthon_1team.kwthon.domian.dto.request.AuthLoginRequestDto;
 import kwthon_1team.kwthon.domian.dto.request.AuthRequestDto;
 import kwthon_1team.kwthon.domian.dto.request.AuthVerificationEmailRequestDto;
 import kwthon_1team.kwthon.service.MemberService;
@@ -32,5 +33,11 @@ public class MemberController {
     public BaseResponse verificationEmail(@RequestBody AuthVerificationEmailRequestDto authVerificationEmailRequestDto) {
         memberService.verifyEmailCode(authVerificationEmailRequestDto.getCode());
         return new BaseResponse(HttpStatus.OK.value(), "사용자 이메일 인증 성공");
+    }
+
+    @PostMapping("/auth/login")
+    public BaseResponse login(@RequestBody AuthLoginRequestDto authLoginRequestDto) {
+        return new BaseResponse(HttpStatus.OK.value(), "로그인 성공",
+                memberService.login(authLoginRequestDto.getStudentId(), authLoginRequestDto.getPassword()));
     }
 }

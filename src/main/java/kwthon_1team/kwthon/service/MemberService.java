@@ -2,6 +2,7 @@ package kwthon_1team.kwthon.service;
 
 import jakarta.servlet.http.HttpSession;
 import kwthon_1team.kwthon.domian.dto.request.AuthRequestDto;
+import kwthon_1team.kwthon.domian.dto.response.AuthLoginResponseDto;
 import kwthon_1team.kwthon.domian.entity.EmailVerification;
 import kwthon_1team.kwthon.domian.entity.Member;
 import kwthon_1team.kwthon.exception.BadRequestException;
@@ -121,5 +122,17 @@ public class MemberService {
             throw new BaseException(400, "이메일 세션이 존재하지 않습니다.");
         }
         return email;
+    }
+
+    @Transactional
+    public AuthLoginResponseDto login(Long studentId, String password) {
+        Member member = getMemberById(studentId);
+        member.validatePassword(password);
+        return new AuthLoginResponseDto(member.getStudentId());
+    }
+
+    private Member getMemberById(Long studentId) {
+        return memberRepository.findByStudentId(studentId).stream().findFirst()
+                .orElseThrow(()->new BaseException(404, "회원가입되지 않은 이메일"));
     }
 }

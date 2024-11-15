@@ -2,7 +2,9 @@ package kwthon_1team.kwthon.domian.entity;
 
 import jakarta.persistence.*;
 import kwthon_1team.kwthon.domian.dto.request.AuthRequestDto;
+import kwthon_1team.kwthon.exception.BaseException;
 import lombok.*;
+import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,4 +48,9 @@ public class Member {
         this.password = authRequestDto.getPassword();
     }
 
+    public void validatePassword(String password) {
+        if (!password.equals(this.password)) {
+            throw new BaseException(HttpStatus.UNAUTHORIZED.value(), "비밀번호 일치하지 않음");
+        }
+    }
 }
