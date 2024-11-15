@@ -3,7 +3,6 @@ package kwthon_1team.kwthon.domian.dto.response;
 import lombok.*;
 
 @Data
-@AllArgsConstructor
 public class TreeResponseDto {
     private int status;
     private String message;
