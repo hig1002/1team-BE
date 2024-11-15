@@ -52,6 +52,16 @@ jobs:
         echo "${{ secrets.S3_ACCESS_KEY }}" >> ./application.properties
         echo "${{ secrets.S3_SECRET_KEY }}" >> ./application.properties
         
+     - name: make application-mail.properties
+      run: |
+        # create application-mail.properties
+        cd ./src/main
+        cd ./resources
+
+        # application-mail.properties 파일 생성하기
+        touch ./application-mail.properties
+
+        
     
       shell: bash
 
