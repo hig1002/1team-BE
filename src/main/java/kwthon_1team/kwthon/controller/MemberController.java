@@ -25,7 +25,7 @@ public class MemberController {
     }
 
     @PostMapping("/auth/signUp")
-    public BaseResponse signUp;(@RequestBody AuthRequestDto authoRequestDto) {
+    public BaseResponse signUp(@RequestBody AuthRequestDto authRequestDto) {
         memberService.join(authRequestDto);
         return new BaseResponse(HttpStatus.OK.value(), "회원가입이 완료되었습니다.");
     }

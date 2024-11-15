@@ -5,13 +5,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
+@Builder
+@AllArgsConstructor
 public class PhotoDto {
-    @Getter
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class PhotoData{
-        private Long photoId;
-        private String photoUrl;
-    }
+    private Long photoId;
+    private String photoUrl;
 }

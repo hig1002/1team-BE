@@ -30,9 +30,6 @@ public class Member {
     private String password;
 
     @Column
-    private Boolean isPublic;
-
-    @Column
     private Integer authentication;  // 이메일 인증번호
 
     @Column (nullable = false)
