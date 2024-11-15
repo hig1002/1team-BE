@@ -14,7 +14,7 @@ public class MailService {
         this.mailRepository = mailRepository;
     }
 
-    public MailBoxResponseDto getPublicMailBox(Long treeId, int receiver) {
+    public MailBoxResponseDto getPublicMailBox(Long studentId, int receiver) {
         List<Mail> mails = mailRepository.findByReceiverAndIsPublic(receiver, true);
         if (mails.isEmpty()) {
             return new MailBoxResponseDto(404, "메일 정보를 찾을 수 없습니다.", null);
