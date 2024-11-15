@@ -1,8 +1,7 @@
 package kwthon_1team.kwthon.domian.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,6 +10,9 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
+@Getter
+@AllArgsConstructor
+@Builder
 public class Mail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,19 +30,13 @@ public class Mail {
     @Column (nullable = false)
     private LocalDateTime mailDate;
 
-    @Column (nullable = false)
-    private String receiver;
-
-    @Column (nullable = false)
-    private String sender;
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "sender")
+    private Member sender;
 
     @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "sender", referencedColumnName = "studentId")
-    private Member member;
-
-    @ManyToOne (fetch = FetchType.LAZY)   // 여기가... 문제
-    @JoinColumn (name = "receiver", referencedColumnName = "studentId")
-    private Member member2;
+    @JoinColumn (name = "receiver")
+    private Member receiver;
 
     @OneToMany (mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Photo> photos = new ArrayList<>();
