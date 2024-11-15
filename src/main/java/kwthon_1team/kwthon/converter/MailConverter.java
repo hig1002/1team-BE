@@ -4,12 +4,9 @@ import kwthon_1team.kwthon.domian.dto.response.MailDetailResponse;
 import kwthon_1team.kwthon.domian.dto.response.MailPagingResponse;
 import kwthon_1team.kwthon.domian.dto.response.MailSummaryResponse;
 import kwthon_1team.kwthon.domian.entity.Mail;
-import kwthon_1team.kwthon.domian.entity.Member;
 import kwthon_1team.kwthon.domian.entity.Photo;
-import kwthon_1team.kwthon.repository.MailRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Component;
 import org.springframework.data.domain.Page;
 
@@ -17,8 +14,6 @@ import org.springframework.data.domain.Page;
 @RequiredArgsConstructor
 public class MailConverter {
 
-    private final MailRepository mailRepository;
-    private final MailConverter mailConverter;
 
     public MailSummaryResponse toMailSummaryResponse(Mail mail, Photo Photo){
         return MailSummaryResponse.builder()
