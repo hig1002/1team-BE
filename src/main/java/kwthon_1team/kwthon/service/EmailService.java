@@ -47,7 +47,6 @@ public class EmailService {
         try {
             javaMailSender.send(createEmailRequestMessage(to, code.toString()));
         } catch (Exception e) {
-            e.printStackTrace();
             throw new BadRequestException("이메일 발송 실패");
         }
     }

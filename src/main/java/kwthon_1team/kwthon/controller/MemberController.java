@@ -28,10 +28,9 @@ public class MemberController {
         return new BaseResponse(HttpStatus.OK.value(), "사용 가능한 이메일");
     }
 
-    @PostMapping("/auth/email-verification")
+    @PostMapping("/auth/emailVerification")
     public BaseResponse verificationEmail(@RequestBody AuthVerificationEmailRequestDto authVerificationEmailRequestDto) {
-        memberService.verifyEmailCode(authVerificationEmailRequestDto.getEmail(),
-                Integer.valueOf(authVerificationEmailRequestDto.getCode()));
+        memberService.verifyEmailCode(authVerificationEmailRequestDto.getCode());
         return new BaseResponse(HttpStatus.OK.value(), "사용자 이메일 인증 성공");
     }
 }
