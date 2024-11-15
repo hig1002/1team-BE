@@ -11,5 +11,5 @@ import org.springframework.data.domain.Page;
 public interface MailRepository extends JpaRepository<Mail,Long> {
 
     @Query("SELECT m FROM Mail m JOIN m.sender s WHERE s.studentId =: memberId")
-    Page<Mail> findAllByFriendId(@Param("memberId") String memberId, Pageable pageable);
+    Page<Mail> findAllByFriendId(@Param("memberId") Long memberId, Pageable pageable);
 }

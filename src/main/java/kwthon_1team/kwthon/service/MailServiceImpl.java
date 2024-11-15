@@ -7,6 +7,7 @@ import kwthon_1team.kwthon.domian.dto.response.MailPagingResponse;
 import kwthon_1team.kwthon.domian.dto.response.MailSummaryResponse;
 import kwthon_1team.kwthon.domian.entity.Mail;
 import kwthon_1team.kwthon.domian.entity.Photo;
+import kwthon_1team.kwthon.exception.BadRequestException;
 import kwthon_1team.kwthon.repository.MailRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class MailServiceImpl implements MailService {
      * 메일 검색
      */
     @Override
-    public MailPagingResponse<MailSummaryResponse> inquiryMailByFriendId(String memberId, int page, int size){
+    public MailPagingResponse<MailSummaryResponse> inquiryMailByFriendId(Long memberId, int page, int size){
         Pageable pageable = PageRequest.of(page, size);
         Page<Mail> mailPage = mailRepository.findAllByFriendId(memberId, pageable);
 
@@ -41,4 +42,10 @@ public class MailServiceImpl implements MailService {
         return mailConverter.toMailPagingResponse(mailSummaryResponses);
     }
 
+    @Override
+    public MailDetailResponse inquiryMailDetailByMailId(Long mailId){
+        Mail mail = mailRepository.findById(mailId)
+                .orElseThrow(()-> new BadRequestException("존재하지 않는 메일입니다."));
+        return mailConverter.toMailDetailResponse(mail);
+    }
 }

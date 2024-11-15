@@ -6,5 +6,6 @@ import kwthon_1team.kwthon.domian.dto.response.MailSummaryResponse;
 
 public interface MailService {
 
-    MailPagingResponse<MailSummaryResponse> inquiryMailByFriendId(String memberId, int page, int size);
+    MailPagingResponse<MailSummaryResponse> inquiryMailByFriendId(Long memberId, int page, int size);
+    MailDetailResponse inquiryMailDetailByMailId(Long mailId);
 }
