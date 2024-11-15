@@ -1,5 +1,6 @@
 package kwthon_1team.kwthon.service;
 
+
 import kwthon_1team.kwthon.domian.dto.request.AuthRequestDto;
 import kwthon_1team.kwthon.domian.entity.Member;
 import kwthon_1team.kwthon.exception.BadRequestException;
@@ -7,12 +8,15 @@ import kwthon_1team.kwthon.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+  import kwthon_1team.kwthon.converter.MemberConverter;
+
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final MemberConverter memberConverter;
 
     private String emailCode;
 
@@ -44,5 +48,9 @@ public class MemberService {
 
     private Member converToMember(AuthRequestDto authRequestDto) {
         return new Member(authRequestDto);
+
+    public List<SearchResponse> search(String keyword) {
+        List<Member> memberList = memberRepository.findAllByKeyword(keyword);
+        return memberList.stream().map(memberConverter::toSearchResponse).toList();
     }
 }
