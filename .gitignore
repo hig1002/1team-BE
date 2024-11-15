@@ -39,6 +39,9 @@ out/
 ### application.yml
 *.yml
 
+###application.properties
+application.properties
+
 ### mySQL 관련 정보 ###
 application-db.properties
 
