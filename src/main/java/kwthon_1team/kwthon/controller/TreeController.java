@@ -1,3 +1,5 @@
+package kwthon_1team.kwthon.controller;
+
 import kwthon_1team.kwthon.common.BaseErrorResponse;
 import kwthon_1team.kwthon.exception.BaseException;
 import org.springframework.http.HttpStatus;
@@ -15,10 +17,10 @@ public class TreeController {
         this.treeService = treeService;
     }
 
-    @GetMapping("/{memberId}")
-    public ResponseEntity<TreeResponseDto> getTreeInfo(@PathVariable Long memberId) {
+    @GetMapping("/{studentId}")
+    public ResponseEntity<TreeResponseDto> getTreeInfo(@PathVariable Long studentId) {
         try {
-            TreeResponseDto responseDto = treeService.getTreeInfo(memberId);
+            TreeResponseDto responseDto = treeService.getTreeInfo(studentId);
             return new ResponseEntity<>(responseDto, HttpStatus.valueOf(responseDto.getStatus()));
         } catch (Exception e) {
             TreeResponseDto errorResponse = new TreeResponseDto(500, "서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.", null);

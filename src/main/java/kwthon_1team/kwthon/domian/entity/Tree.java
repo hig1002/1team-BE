@@ -1,3 +1,5 @@
+package kwthon_1team.kwthon.domian.entity;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +17,7 @@ public class Tree {
     private Long id;
 
     @Column(nullable = false)
-    private Long memberId;
+    private Long studentId;
 
     @Column(nullable = false)
     private int treeLevel;
