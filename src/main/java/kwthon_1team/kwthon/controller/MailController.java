@@ -24,7 +24,7 @@ public class MailController {
         return new BaseResponse(HttpStatus.OK.value(), "친구 메일이 검색 되었습니다.",mailService.inquiryMailByFriendId(memberId, page, size));
     }
 
-    @GetMapping("/frndmail/{mailId}")
+    @GetMapping("/friendMail/detail/{mailId}")
     public BaseResponse<MailDetailResponse> inquiryMailByMailId(@PathVariable("mailId") Long mailId){
         return new BaseResponse(HttpStatus.OK.value(), "메일 정보를 불러왔습니다.", mailService.inquiryMailDetailByMailId(mailId));
     }

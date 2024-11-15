@@ -38,6 +38,6 @@ public class Mail {
     @JoinColumn (name = "receiver")
     private Member receiver;
 
-    @OneToMany (mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany (mappedBy = "mail", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Photo> photos = new ArrayList<>();
 }
