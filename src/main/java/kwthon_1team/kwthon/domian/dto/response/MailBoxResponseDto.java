@@ -1,27 +1,20 @@
 package kwthon_1team.kwthon.domian.dto.response;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.util.List;
 
-@Data
+@Getter
+@AllArgsConstructor
 public class MailBoxResponseDto {
     private int status;
     private String message;
     private MailBoxDataDto data;
 
-    public MailBoxResponseDto(int status, String message, MailBoxDataDto data) {
-        this.status = status;
-        this.message = message;
-        this.data = data;
+    @Getter
+    @AllArgsConstructor
+    public static class MailBoxDataDto {
+        private List<MailDto> mails;
     }
-
-}
-
-class MailBoxDataDto {
-    private List<MailDto> mails;
-
-    public MailBoxDataDto(List<MailDto> mails) {
-        this.mails = mails;
-    }
-
 }

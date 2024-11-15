@@ -1,19 +1,15 @@
 package kwthon_1team.kwthon.domian.dto.response;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Data
+@Getter
+@AllArgsConstructor
 public class MailDto {
     private String mailDate;
     private String mailName;
     private Long senderId;
-    private String name;
-
-    public MailDto(String mailDate, String mailName, Long senderId, String name) {
-        this.mailDate = mailDate;
-        this.mailName = mailName;
-        this.senderId = senderId;
-        this.name = name;
-    }
-
+    private String name; // 송신자 이름
+    private Long photoId;
+    private String photoUrl;
 }

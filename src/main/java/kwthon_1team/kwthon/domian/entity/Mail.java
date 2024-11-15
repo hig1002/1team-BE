@@ -32,7 +32,7 @@ public class Mail {
     @JoinColumn (name = "sender")
     private Member sender;
 
-    @ManyToOne (fetch = FetchType.LAZY)   // 여기가... 문제
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "receiver")
     private Member receiver;
 
