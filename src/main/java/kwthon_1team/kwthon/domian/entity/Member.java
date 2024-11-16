@@ -23,17 +23,11 @@ public class Member {
     @Column (nullable = false)
     private String name;
 
-    @Column
+    @Column (name = "email", unique = true)
     private String email;
 
     @Column
     private String password;
-
-    @Column
-    private Boolean isPublic;
-
-    @Column
-    private Integer authentication;  // 이메일 인증번호
 
     @Column (nullable = false)
     private Integer treeLevel = 0;
