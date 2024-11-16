@@ -15,15 +15,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
     private final String[] possibleAccess = {"/api/auth/signUp", "/api/auth/emailVerification", "/api/auth/login",
-            "/api/error", "/api", "/error", "/auth/**", "/api/kwTree/**", "/kwTree/**" ,"/friendMail/**","/myMail/**","/mail/**","/search"};
+            "/api/error", "/api", "/error", "/auth/**", "/api/kwTree/**", "/kwTree/**" ,"/friendMail/**","/myMail/**","/mail/**", "/search"};
 
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    @Bean
+/*
+   @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .headers((header) -> header.frameOptions(frameOptionsConfig -> frameOptionsConfig.disable()));
@@ -33,7 +33,6 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement((sessionManagement) ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
         http
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorizeRequests)->
@@ -46,6 +45,24 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.PATCH, possibleAccess).permitAll()
                                 .anyRequest().authenticated()
                 );
+        return http.build();
+    }*/
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .cors(cors -> cors.disable())
+                .csrf(csrf -> csrf.disable())
+                .httpBasic(httpBasic -> httpBasic.disable())
+                .formLogin(formLogin -> formLogin.disable())
+                .sessionManagement(sessionManagement ->
+                        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .authorizeHttpRequests(authorizeRequests ->
+                        authorizeRequests
+                                .anyRequest().permitAll()
+                );
+
         return http.build();
     }
 }
