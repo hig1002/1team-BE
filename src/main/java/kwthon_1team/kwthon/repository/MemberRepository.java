@@ -14,9 +14,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByEmail(String email);
     Optional<Member> findByStudentId(Long studentId);
     @Query("SELECT m FROM Member m WHERE " +
-       "(m.name LIKE CONCAT('%', :keyword, '%') " +
-       "OR m.department LIKE CONCAT('%', :keyword, '%') " +
-       "OR CONCAT(m.studentId, '') LIKE CONCAT('%', :keyword, '%'))")
+       "(m.name LIKE CONCAT(:keyword, '%') " +
+       "OR m.department LIKE CONCAT(:keyword, '%') " +
+       "OR CAST(m.studentId AS string) LIKE CONCAT(:keyword, '%'))")
     List<Member> findAllByKeyword(@Param("keyword") String keyword);
 
 }
