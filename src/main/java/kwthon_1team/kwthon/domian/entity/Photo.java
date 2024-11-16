@@ -1,15 +1,14 @@
 package kwthon_1team.kwthon.domian.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 public class Photo {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
