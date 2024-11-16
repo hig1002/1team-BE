@@ -15,5 +15,4 @@ public class UploadLetterRequestDto {
     private String mailTitle;
     private String mailText;
     private Boolean isPublic;
-    private List<MultipartFile> photos;
 }

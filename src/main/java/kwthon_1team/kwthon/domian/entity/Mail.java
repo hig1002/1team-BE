@@ -1,8 +1,7 @@
 package kwthon_1team.kwthon.domian.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,6 +10,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
+@Builder
+@AllArgsConstructor
 public class Mail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.apache.http.protocol.HTTP;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("mail")
@@ -17,10 +20,13 @@ public class UploadLetterController {
     private final UploadLetterService uploadLetterService;
 
     @PostMapping("/{memberId}")
-    public BaseResponse<UploadLetterResponseDto> uploadLetter(@PathVariable("memberId") Long memberId, @ModelAttribute UploadLetterRequestDto request){
+    public BaseResponse<UploadLetterResponseDto> uploadLetter(
+            @PathVariable("memberId") Long memberId,
+            @RequestPart("request") UploadLetterRequestDto request,
+            @RequestPart(value = "mailPhoto", required = false) List<MultipartFile> mailPhotos
+    ){
         try {
-            System.out.println("getPhotos" + request.getPhotos());
-            return new BaseResponse(HttpStatus.OK.value(), "편지 작성이 완료되었습니다.", uploadLetterService.registerLetter(memberId, request));
+            return new BaseResponse(HttpStatus.OK.value(), "편지 작성이 완료되었습니다.", uploadLetterService.registerLetter(memberId, request, mailPhotos));
         }catch (Exception e){
             e.printStackTrace();
             return new BaseResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), null);

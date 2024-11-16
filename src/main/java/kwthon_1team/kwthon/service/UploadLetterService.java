@@ -1,5 +1,6 @@
 package kwthon_1team.kwthon.service;
 
+import kwthon_1team.kwthon.converter.MailConverter;
 import kwthon_1team.kwthon.domian.dto.request.UploadLetterRequestDto;
 import kwthon_1team.kwthon.domian.dto.response.UploadLetterResponseDto;
 import kwthon_1team.kwthon.domian.entity.Mail;
@@ -10,6 +11,7 @@ import kwthon_1team.kwthon.repository.MemberRepository;
 import kwthon_1team.kwthon.repository.PhotoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -24,39 +26,21 @@ public class UploadLetterService {
     private final S3Uploader s3Uploader;
     private final MemberRepository memberRepository;
     private final PhotoRepository photoRepository;
+    private final MailConverter mailConverter;
+    private final PhotoService photoService;
 
-    public UploadLetterResponseDto registerLetter(Long memberId, UploadLetterRequestDto request) throws IOException {
+    public UploadLetterResponseDto registerLetter(Long memberId, UploadLetterRequestDto request, List<MultipartFile> mailPhotos) throws IOException {
         Member sender = memberRepository.findById(memberId)
                 .orElseThrow(()-> new IllegalArgumentException("Sender not found with id : " + memberId));
         Member receiver = memberRepository.findById(request.getReceiverId())
                 .orElseThrow(()-> new IllegalArgumentException("Receiver not found with id : " + request.getReceiverId()));
 
-        //photo 처리
-        List<MultipartFile> photos = request.getPhotos();
 
-
-        Mail mail = new Mail();
-        mail.setMailTitle(request.getMailTitle());
-        mail.setMailText(request.getMailText());
-        mail.setIsPublic(request.getIsPublic());
-        mail.setSender(sender);
-        mail.setReceiver(receiver);
-        mail.setMailDate(LocalDateTime.now());
+        Mail mail = mailConverter.toMail(request, mailPhotos ,sender, receiver);
 
         mail = mailRepository.save(mail);
 
-        List<Photo> photoEntities = new ArrayList<>();
-        for(MultipartFile photo : photos) {
-            String photoUrl = s3Uploader.upload(photo, "mail-photos");
-
-            Photo photoEntity = new Photo();
-            photoEntity.setPhotoUrl(photoUrl);
-            photoEntity.setMail(mail);
-            photoEntities.add(photoEntity);
-        }
-        photoRepository.saveAll(photoEntities);
-
-        mail.setPhotos(photoEntities);
+        photoService.createAndSavePhoto(mail, mailPhotos);
 
         return UploadLetterResponseDto.builder()
                 .mailId(mail.getMailId())
