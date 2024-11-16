@@ -103,26 +103,6 @@ public class MemberService {
         emailVerificationRepository.delete(emailVerification);
     }
 
-    /*private void saveEmailToSession(String email) {
-        HttpSession session = getHttpSession();
-        session.setAttribute("email", email);
-        System.out.println("이메일이 세션에 저장되었습니다: " + email);
-    }
-
-    private HttpSession getHttpSession() {
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        return attr.getRequest().getSession(true);
-    }
-
-    private String getEmailFromSession() {
-        HttpSession session = getHttpSession();
-        String email = (String) session.getAttribute("email");
-        if (email == null) {
-            throw new BaseException(400, "이메일 세션이 존재하지 않습니다.");
-        }
-        return email;
-    }*/
-
     @Transactional
     public AuthLoginResponseDto login(Long studentId, String password) {
         Member member = getMemberById(studentId);
