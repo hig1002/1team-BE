@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    String[] accessURL = {"http://localhost:8080", "http://localhost:5173"};
+    String[] accessURL = {"http://localhost:5173"};
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -14,7 +14,6 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins(accessURL)
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
-                .allowCredentials(true)
                 .maxAge(3000);
     }
 }
