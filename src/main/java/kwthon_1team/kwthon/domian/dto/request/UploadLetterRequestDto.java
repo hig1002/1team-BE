@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 public class UploadLetterRequestDto {
-    private Long memberId;
+    //private Long memberId;
     private Long receiverId;
     private String mailTitle;
     private String mailText;
