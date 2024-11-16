@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class UploadLetterRequestDto {
     //private Long memberId;
     private Long receiverId;
