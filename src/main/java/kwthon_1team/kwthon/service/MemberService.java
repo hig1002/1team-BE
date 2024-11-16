@@ -108,6 +108,7 @@ public class MemberService {
     private void saveEmailToSession(String email) {
         HttpSession session = getHttpSession();
         session.setAttribute("email", email);
+        System.out.println("이메일이 세션에 저장되었습니다: " + email);
     }
 
     private HttpSession getHttpSession() {
