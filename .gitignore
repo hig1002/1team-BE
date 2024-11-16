@@ -39,7 +39,11 @@ out/
 ### application.yml
 *.yml
 
-### postgreSQL 관련 정보 ###
+###application.properties
+application.properties
+
+### mySQL 관련 정보 ###
+application-db.properties
 
 ### Email 관련 정보 ###
 application-mail.properties
