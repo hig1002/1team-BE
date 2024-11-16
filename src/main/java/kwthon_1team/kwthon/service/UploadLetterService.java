@@ -43,7 +43,7 @@ public class UploadLetterService {
         if (mailPhotos != null && !mailPhotos.isEmpty()) {
             photoService.createAndSavePhoto(mail, mailPhotos);
         }
-g
+
         return UploadLetterResponseDto.builder()
                 .mailId(mail.getMailId())
                 .build();
