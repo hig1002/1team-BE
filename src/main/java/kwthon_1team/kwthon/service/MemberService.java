@@ -1,7 +1,9 @@
 package kwthon_1team.kwthon.service;
 
+import kwthon_1team.kwthon.converter.MemberConverter;
 import kwthon_1team.kwthon.domian.dto.request.AuthRequestDto;
 import kwthon_1team.kwthon.domian.dto.response.AuthLoginResponseDto;
+import kwthon_1team.kwthon.domian.dto.response.SearchResponse;
 import kwthon_1team.kwthon.domian.entity.EmailVerification;
 import kwthon_1team.kwthon.domian.entity.Member;
 import kwthon_1team.kwthon.exception.BadRequestException;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -21,6 +24,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final EmailService emailService;
     private final EmailVerificationRepository emailVerificationRepository;
+    private final MemberConverter memberConverter;
 
     @Transactional
     public void join(AuthRequestDto authRequestDto) {
@@ -129,5 +133,10 @@ public class MemberService {
     private Member getMemberById(Long studentId) {
         return memberRepository.findByStudentId(studentId).stream().findFirst()
                 .orElseThrow(()->new BaseException(404, "회원가입되지 않은 이메일"));
+    }
+
+    public List<SearchResponse> search(String keyword) {
+        List<Member> memberList = memberRepository.findAllByKeyword(keyword);
+        return memberList.stream().map(memberConverter::toSearchResponse).toList();
     }
 }
