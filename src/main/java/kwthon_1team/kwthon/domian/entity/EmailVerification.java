@@ -1,9 +1,6 @@
 package kwthon_1team.kwthon.domian.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -15,6 +12,7 @@ public class EmailVerification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long emailId;
 
+    @Column(unique = true, nullable = false)
     private String email;
     private Integer verificationCode;
     private LocalDateTime expirationTime;
