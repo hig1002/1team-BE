@@ -8,8 +8,11 @@ import kwthon_1team.kwthon.service.UploadLetterService;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.protocol.HTTP;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.MediaType;
+
 
 import java.util.List;
 
@@ -19,7 +22,7 @@ import java.util.List;
 public class UploadLetterController {
     private final UploadLetterService uploadLetterService;
 
-    @PostMapping("/{memberId}")
+    @PostMapping(value = "/{memberId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public BaseResponse<UploadLetterResponseDto> uploadLetter(
             @PathVariable("memberId") Long memberId,
             @RequestPart("request") UploadLetterRequestDto request,
