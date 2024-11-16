@@ -40,7 +40,9 @@ public class UploadLetterService {
 
         mail = mailRepository.save(mail);
 
-        photoService.createAndSavePhoto(mail, mailPhotos);
+        if (mailPhotos != null && !mailPhotos.isEmpty()) {
+            photoService.createAndSavePhoto(mail, mailPhotos);
+        }
 
         return UploadLetterResponseDto.builder()
                 .mailId(mail.getMailId())
