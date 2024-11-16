@@ -19,7 +19,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/search")
-    public BaseResponse<List<SearchResponse>> search(@RequestParam String keyword) {
+    public BaseResponse<List<SearchResponse>> search(@RequestParam(value = "keyword") String keyword) {
         return new BaseResponse(HttpStatus.OK.value(), "검색 결과를 불러왔습니다.", memberService.search(keyword));
     }
 
