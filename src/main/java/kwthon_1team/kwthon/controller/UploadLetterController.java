@@ -2,7 +2,6 @@ package kwthon_1team.kwthon.controller;
 
 import kwthon_1team.kwthon.common.BaseResponse;
 import kwthon_1team.kwthon.domian.dto.request.UploadLetterRequestDto;
-import kwthon_1team.kwthon.domian.dto.request.UploadLetterRequstDto;
 import kwthon_1team.kwthon.domian.dto.response.UploadLetterResponseDto;
 import kwthon_1team.kwthon.service.MailService;
 import kwthon_1team.kwthon.service.UploadLetterService;
