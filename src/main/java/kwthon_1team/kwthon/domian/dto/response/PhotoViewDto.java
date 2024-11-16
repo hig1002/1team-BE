@@ -4,11 +4,11 @@ import lombok.*;
 
 @Data
 @Getter
-public class PhotoDto {
+public class PhotoViewDto {
     private Long photoId;
     private String photoUrl;
 
-    public PhotoDto(Long photoId, String photoUrl) {
+    public PhotoViewDto(Long photoId, String photoUrl) {
         this.photoId = photoId;
         this.photoUrl = photoUrl;
 

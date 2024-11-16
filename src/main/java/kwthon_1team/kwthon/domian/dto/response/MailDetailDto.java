@@ -12,10 +12,10 @@ public class MailDetailDto {
     private Long senderId;
     private String senderName;
     private boolean isisPublic;
-    private List<PhotoDto> photos;
+    private List<PhotoViewDto> photos;
 
     public MailDetailDto(String mailName, String mailText, Long receiverId, String receiverName,
-                         Long senderId, String senderName, boolean isisPublic, List<PhotoDto> photos) {
+                         Long senderId, String senderName, boolean isisPublic, List<PhotoViewDto> photos) {
         this.mailName = mailName;
         this.mailText = mailText;
         this.receiverId = receiverId;

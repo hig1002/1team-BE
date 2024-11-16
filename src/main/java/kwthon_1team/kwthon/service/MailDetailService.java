@@ -2,7 +2,7 @@ package kwthon_1team.kwthon.service;
 
 import kwthon_1team.kwthon.domian.dto.response.MailBoxResponseDto;
 import kwthon_1team.kwthon.domian.dto.response.MailDetailDto;
-import kwthon_1team.kwthon.domian.dto.response.PhotoDto;
+import kwthon_1team.kwthon.domian.dto.response.PhotoViewDto;
 import kwthon_1team.kwthon.domian.entity.Mail;
 import kwthon_1team.kwthon.domian.entity.Member;
 import kwthon_1team.kwthon.repository.MailDetailRepository;
@@ -42,8 +42,8 @@ public class MailDetailService {
                 .map(Member::getName)
                 .orElse("이름을 찾을 수 없음");
 
-        List<PhotoDto> photos = photoRepository.findByMail_MailId(mailId).stream()
-                .map(photo -> new PhotoDto(photo.getPhotoId(), photo.getPhotoUrl())) // error 값은 기본적으로 null로 전달됩니다.
+        List<PhotoViewDto> photos = photoRepository.findByMail_MailId(mailId).stream()
+                .map(photo -> new PhotoViewDto(photo.getPhotoId(), photo.getPhotoUrl())) // error 값은 기본적으로 null로 전달됩니다.
                 .collect(Collectors.toList());
 
         // MailDetailDto에 조회한 receiverName과 senderName을 포함
