@@ -1,5 +1,6 @@
 package kwthon_1team.kwthon.domian.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import kwthon_1team.kwthon.domian.dto.request.AuthRequestDto;
 import kwthon_1team.kwthon.exception.BaseException;
@@ -17,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Member {
     @Id
+    @Column(name = "studentId")
     private Long studentId;
 
     @Column
@@ -31,13 +33,15 @@ public class Member {
     @Column
     private String password;
 
-    @Column (nullable = false)
+    @Column (nullable = false, name = "treeLevel")
     private Integer treeLevel = 0;
 
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Mail> senders = new ArrayList<>();
 
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Mail> receivers = new ArrayList<>();
 
     public Member(AuthRequestDto authRequestDto) {

@@ -2,11 +2,10 @@ package kwthon_1team.kwthon.service;
 
 import kwthon_1team.kwthon.converter.MemberConverter;
 import kwthon_1team.kwthon.domian.dto.request.AuthRequestDto;
-import kwthon_1team.kwthon.domian.dto.response.AuthLoginResponseDto;
+import kwthon_1team.kwthon.domian.dto.response.AuthLoginResponse;
 import kwthon_1team.kwthon.domian.dto.response.SearchResponse;
 import kwthon_1team.kwthon.domian.entity.EmailVerification;
 import kwthon_1team.kwthon.domian.entity.Member;
-import kwthon_1team.kwthon.exception.BadRequestException;
 import kwthon_1team.kwthon.exception.BaseException;
 import kwthon_1team.kwthon.repository.EmailVerificationRepository;
 import kwthon_1team.kwthon.repository.MemberRepository;
@@ -46,7 +45,7 @@ public class MemberService {
 
     @Transactional (readOnly = true)
     public void validateUniversityEmail(String email) {
-        if (!email.endsWith("@kw.ac.kr")) {
+        if (!email.endsWith("@naver.com")) {
             throw new BaseException(400, "광운대학교 이메일(@kw.ac.kr)만 입력해 주세요.");
         }
     }
@@ -125,10 +124,10 @@ public class MemberService {
     }*/
 
     @Transactional
-    public AuthLoginResponseDto login(Long studentId, String password) {
+    public AuthLoginResponse login(Long studentId, String password) {
         Member member = getMemberById(studentId);
         member.validatePassword(password);
-        return new AuthLoginResponseDto(member.getStudentId());
+        return new AuthLoginResponse(member.getStudentId());
     }
 
     private Member getMemberById(Long studentId) {

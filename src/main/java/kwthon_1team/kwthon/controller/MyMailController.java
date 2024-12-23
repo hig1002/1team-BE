@@ -4,11 +4,9 @@ import kwthon_1team.kwthon.common.BaseResponse;
 import kwthon_1team.kwthon.domian.dto.response.MailPagingResponse;
 import kwthon_1team.kwthon.domian.dto.response.MailSummaryResponse;
 import kwthon_1team.kwthon.domian.dto.response.MyMailOneDetailResponse;
-import kwthon_1team.kwthon.service.MailService;
 import kwthon_1team.kwthon.service.MyMailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

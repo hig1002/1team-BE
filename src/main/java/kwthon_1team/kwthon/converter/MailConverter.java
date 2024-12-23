@@ -13,16 +13,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 public class MailConverter {
 
-    public Mail toMail(UploadLetterRequestDto requestDto, List<MultipartFile> mailPhotos, Member sender, Member receiver){
+    public Mail toMail(UploadLetterRequestDto requestDto, List<MultipartFile> mailPhotos, Member sender, Member receiver, LocalDateTime mailDate){
         return Mail.builder()
                 .mailTitle(requestDto.getMailTitle())
                 .mailText(requestDto.getMailText())
+                .mailDate(mailDate)
                 .isPublic(requestDto.getIsPublic())
                 .sender(sender)
                 .receiver(receiver)
@@ -30,7 +32,7 @@ public class MailConverter {
     }
 
 
-    public MailSummaryResponse toMailSummaryResponse(Mail mail, Photo Photo){
+    public MailSummaryResponse toMailSummaryResponse(Mail mail, Photo photo){
         return MailSummaryResponse.builder()
                 .mailId(mail.getMailId())
                 .mailDate(mail.getMailDate())
@@ -38,7 +40,7 @@ public class MailConverter {
                 .senderId(mail.getSender().getStudentId())
                 .senderName(mail.getSender().getName())
                 .isPublic(mail.getIsPublic())
-                .photo(Photo)
+                .photo(photo)
                 .build();
     }
 
@@ -51,6 +53,7 @@ public class MailConverter {
                 .senderName(mail.getSender().getName())
                 .isPublic(mail.getIsPublic())
                 .mailDate(mail.getMailDate())
+                .photos(mail.getPhotos())
                 .build();
     }
 

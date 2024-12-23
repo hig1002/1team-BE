@@ -16,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Page;
 
-
 @Service
 @RequiredArgsConstructor
 public class MailServiceImpl implements MailService {
@@ -32,6 +31,7 @@ public class MailServiceImpl implements MailService {
         Pageable pageable = PageRequest.of(page, size);
         Page<Mail> mailPage = mailRepository.findAllByFriendId(memberId, pageable);
 
+        //System.out.println(mailPage.getContent());
         Page<MailSummaryResponse> mailSummaryResponses = mailPage.map(mail->{
             Photo firstPhoto = mail.getPhotos() != null && !mail.getPhotos().isEmpty()
                     ? mail.getPhotos().get(0)
@@ -44,8 +44,9 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public MailDetailResponse inquiryMailDetailByMailId(Long mailId){
-        Mail mail = mailRepository.findById(mailId)
+        Mail mail = mailRepository.findByMailId(mailId)
                 .orElseThrow(()-> new BadRequestException("존재하지 않는 메일입니다."));
+
         return mailConverter.toMailDetailResponse(mail);
     }
 }

@@ -18,5 +18,4 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
        "OR m.department LIKE CONCAT(:keyword, '%') " +
        "OR CAST(m.studentId AS string) LIKE CONCAT(:keyword, '%'))")
     List<Member> findAllByKeyword(@Param("keyword") String keyword);
-
 }
