@@ -1,5 +1,6 @@
 package kwthon_1team.kwthon.domian.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,5 +20,6 @@ public class Photo {
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "mailId")
+    @JsonIgnore
     private Mail mail;
 }

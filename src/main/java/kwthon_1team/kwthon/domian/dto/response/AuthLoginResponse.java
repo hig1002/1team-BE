@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthLoginResponseDto {
+public class AuthLoginResponse {
     private Long studentId;
 }

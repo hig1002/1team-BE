@@ -1,5 +1,7 @@
 package kwthon_1team.kwthon.domian.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,12 +33,16 @@ public class Mail {
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "sender")
+    @JsonIgnore
     private Member sender;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "receiver")
+    @JsonIgnore
     private Member receiver;
 
     @OneToMany (mappedBy = "mail", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    //@JsonManagedReference
+    @JsonIgnore
     private List<Photo> photos = new ArrayList<>();
 }

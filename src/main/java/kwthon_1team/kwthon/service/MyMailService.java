@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class MyMailService {
     private final MailRepository mailRepository;
 
-    public MailPagingResponse<MyMailDetailResponseDto> myMailByMemberId(Long memberId, int page, int size, String filter){
+    public MailPagingResponse<MyMailDetailResponse> myMailByMemberId(Long memberId, int page, int size, String filter){
         //페이징 정보를 위함
         Pageable pageable = PageRequest.of(page,size, Sort.by("mailDate").descending());
 
@@ -32,11 +32,11 @@ public class MyMailService {
             throw new IllegalArgumentException("Invaild filter value : "+filter);
         }
 
-        List<MyMailDetailResponseDto> mailDetails = mailPage.getContent().stream()
+        List<MyMailDetailResponse> mailDetails = mailPage.getContent().stream()
                 .map(this::convertToMyMailDetailResponseDto)
                 .collect(Collectors.toList());
 
-        return MailPagingResponse.<MyMailDetailResponseDto>builder()
+        return MailPagingResponse.<MyMailDetailResponse>builder()
                 .emails(mailDetails)
                 .page(mailPage.getNumber())
                 .totalPages(mailPage.getTotalPages())
@@ -46,7 +46,7 @@ public class MyMailService {
                 .build();
     }
 
-    private MyMailDetailResponseDto convertToMyMailDetailResponseDto(Mail mail){
+    private MyMailDetailResponse convertToMyMailDetailResponseDto(Mail mail){
         //List photos
         List<PhotoDto> photos = mail.getPhotos().stream()
                 .map(photo -> new PhotoDto(photo.getPhotoId(), photo.getPhotoUrl()))
@@ -56,7 +56,7 @@ public class MyMailService {
         // photos 리스트에서 첫 번째 사진만 가져오기
         PhotoDto latestPhoto = photos.isEmpty() ? null : photos.get(0);
 
-        return MyMailDetailResponseDto.builder()
+        return MyMailDetailResponse.builder()
                 .mailId(mail.getMailId())
                 .mailDate(mail.getMailDate())
                 .mailTitle(mail.getMailTitle())

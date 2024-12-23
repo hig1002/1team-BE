@@ -39,7 +39,8 @@ public class EmailConfig {
         Properties properties = new Properties();
         properties.setProperty("mail.transport.protocol", "smtp");  // 프로토콜 설정
         properties.setProperty("mail.smtp.auth", "true"); // smtp 인증
-        properties.setProperty("mail.smtp.starttls.enable", "true"); // smtp starttls 사용
+        properties.setProperty("mail.smtp.starttls.enable", "false");
+        properties.setProperty("mail.smtp.ssl.enable", "true");// smtp starttls 사용
         properties.setProperty("mail.debug", "true"); // 디버그 사용
         properties.setProperty("mail.smtp.ssl.trust", "smtp.naver.com"); // SMTP 서버 주소
         return properties;

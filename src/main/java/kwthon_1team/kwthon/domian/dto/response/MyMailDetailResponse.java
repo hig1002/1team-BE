@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @Builder
-public class MyMailDetailResponseDto {
+public class MyMailDetailResponse {
     private Long mailId;
     private LocalDateTime mailDate;
     private String mailTitle;

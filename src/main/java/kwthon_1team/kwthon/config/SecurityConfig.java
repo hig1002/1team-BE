@@ -15,14 +15,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
     private final String[] possibleAccess = {"/api/auth/signUp", "/api/auth/emailVerification", "/api/auth/login",
-            "/api/error", "/api", "/error", "/auth/**", "/api/kwTree/**", "/kwTree/**" ,"/friendMail/**","/myMail/**","/mail/**", "/search"};
+            "/api/error", "/api", "/error", "/auth/**", "/api/kwTree/**", "/kwTree/**" ,"/friendMail/**","/myMail/**","/mail/**", "/search"
+    ,"/tree/**"};
 
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-/*
+
    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -43,11 +44,12 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.PUT, possibleAccess).permitAll()
                                 .requestMatchers(HttpMethod.DELETE, possibleAccess).permitAll()
                                 .requestMatchers(HttpMethod.PATCH, possibleAccess).permitAll()
+                                .requestMatchers(HttpMethod.GET, "/swagger-ui/**","/v3/api-docs/**").permitAll()
                                 .anyRequest().authenticated()
                 );
         return http.build();
-    }*/
-
+    }
+    /*
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -64,5 +66,5 @@ public class SecurityConfig {
                 );
 
         return http.build();
-    }
+    }*/
 }

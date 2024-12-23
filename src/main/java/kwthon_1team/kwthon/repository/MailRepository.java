@@ -8,11 +8,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.parameters.P;
 
+import java.util.Optional;
+
 
 public interface MailRepository extends JpaRepository<Mail,Long> {
 
-    @Query("SELECT m FROM Mail m JOIN m.sender s WHERE  m.isPublic = true AND s.studentId = :memberId")
+    //@Query("SELECT m FROM Mail m JOIN m.sender s WHERE  m.isPublic = true AND s.studentId = :memberId")
+    @Query("SELECT distinct m FROM Mail m where m.isPublic = true AND m.receiver.studentId = :memberId order by m.mailDate desc")
     Page<Mail> findAllByFriendId(@Param("memberId") Long memberId, Pageable pageable);
+
+    @Query("select distinct m from Mail m JOIN fetch m.photos where m.mailId = :mailId and m.isPublic = true")
+    Optional<Mail> findByMailId(@Param("mailId") Long mailId);
 
     @Query("select m from Mail m where m.sender.studentId = :memberId ")
     Page<Mail> findAllSenderByMyId(@Param("memberId")Long memberId, Pageable pageable);
